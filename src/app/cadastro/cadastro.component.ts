@@ -18,7 +18,6 @@ export class CadastroComponent implements OnInit {
 
   constructor (private database: DBService) {
     this.novoUsuario = new Usuario();
-
     this.carregarUsuarios();
   }
 
@@ -26,11 +25,9 @@ export class CadastroComponent implements OnInit {
 
   private carregarUsuarios() {
     this.carregando = true;
-
     this.database.listar<Usuario>('usuarios')
     .then(usuariosDB => {
       this.usuarios = usuariosDB;
-
       this.carregando = false;
     });
   }
@@ -38,7 +35,6 @@ export class CadastroComponent implements OnInit {
   cadastrar() {
     this.database.inserir('usuarios', this.novoUsuario)
       .then(() => {
-        alert('Usuário cadastrado com sucesso');
         this.novoUsuario = new Usuario();
         this.carregarUsuarios();
       });
@@ -47,8 +43,6 @@ export class CadastroComponent implements OnInit {
   remover(uid: string) {
     this.database.remover('usuarios', uid)
       .then(() => {
-        alert('usuário removido com sucesso');
-
         this.carregarUsuarios();
       });
   }
@@ -64,8 +58,6 @@ export class CadastroComponent implements OnInit {
   confirmEdit(usuario) {
     this.database.atualizar('usuarios', usuario.uid, { nome: usuario.nome, email: usuario.email })
       .then(() => {
-        alert('usuário atualizado com sucesso');
-
         this.carregarUsuarios();
       });
   }

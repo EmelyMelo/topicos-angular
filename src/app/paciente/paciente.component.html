@@ -1,0 +1,65 @@
+<div class="content card">
+  <h4 align="center">
+    <p>Insira os dados do seu paciente</p>
+  </h4>
+  <p>
+    <label class="t">Nome</label>
+    <input id="last_name" type="text" class="validate" [(ngModel)]="paciente.nome">
+  </p>
+  <p>
+    <label class="t">CPF</label>
+    <input id="last_name" type="text" class="validate" [(ngModel)]="paciente.cpf">
+  </p>
+  <div align="right" class="button-container">
+    <button [disabled]="!paciente.nome || !paciente.cpf" (click)="salvar()">SALVAR</button>
+  </div>
+
+  <div *ngIf="carregando" class="progress">
+      <div class="indeterminate"></div>
+    </div>
+
+  <h6 align="center"*ngIf="!pacientes && !carregando">Não há pacientes cadastrados</h6>
+
+  <div *ngIf="pacientes">
+    <h6>Pacientes cadastrados</h6>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let paciente of pacientes">
+          <td>
+            <span *ngIf="!paciente.editando">{{paciente.nome}}</span>
+            <input *ngIf="paciente.editando" type="text" [(ngModel)]="paciente.nome" name="nome-{{paciente.uid}}">
+          </td>
+          <td>
+            <span *ngIf="!paciente.editando">{{paciente.cpf}}</span>
+            <input *ngIf="paciente.editando" type="text" [(ngModel)]="paciente.cpf" name="cpf-{{paciente.uid}}">
+          </td>
+          <td *ngIf="!paciente.editando" class="remove-parent">
+            <a class="edit-parent" (click)="editar(paciente)" href="javascript:void(0);">
+              <i class="material-icons">edit</i>
+            </a>
+            <a (click)="remover(paciente.uid)" href="javascript:void(0);">
+              <i class="material-icons">delete</i>
+            </a>
+          </td>
+          <td *ngIf="paciente.editando" class="remove-parent">
+            <a class="confirm-parent" (click)="confirmEdit(paciente)" href="javascript:void(0);">
+              <i class="material-icons">check</i>
+            </a>
+            <a (click)="cancelEdit(paciente)" href="javascript:void(0);">
+              <i class="material-icons">close</i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</div>

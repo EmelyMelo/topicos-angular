@@ -7,13 +7,13 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { CadastroComponent } from './cadastro/cadastro.component';
-import { AnimalComponent } from './animal/animal.component';
+import { PacienteComponent } from './paciente/paciente.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CadastroComponent,
-    AnimalComponent,
+    PacienteComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,7 +21,7 @@ import { AnimalComponent } from './animal/animal.component';
     AngularFireModule.initializeApp(environment.firebase),
     RouterModule.forRoot([
       { path: 'usuario', component: CadastroComponent },
-      { path: 'animal', component: AnimalComponent }
+      { path: 'paciente', component: PacienteComponent }
     ])
   ],
   providers: [AngularFireDatabase],
